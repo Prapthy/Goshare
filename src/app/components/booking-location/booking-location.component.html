@@ -1,0 +1,115 @@
+
+<div *ngIf="error" class=" relative">
+    <h2 class="absolute z-20 text-center bg-gray-900 py-2 px-8 capitalize rounded text-red-500 text-2xl left-[40%] bottom-0">{{error}}</h2>
+</div>
+
+<div>
+    <form (ngSubmit)="onSubmit()">
+        
+        <div class="grid grid-cols-2 gap-8">
+            <div>
+                <div class="relative alskfdl0 w-full mb-6 group">
+
+                    <input
+                        (focus)="onFucusChange('start')"
+                        [(ngModel)]="startLocation"
+                        (input)="searchStartLocations()"
+                        #load_location="ngModel"
+                        type="text"
+                        name="load_location"
+                        id="load_location"
+                        class="block alskfdl1 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder=" " required />
+                    <label for="load_location"
+                        class="alskfdl1 peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -alskfdl10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Load
+                        Location</label>
+                    <div style="z-index: 99;"
+                        class=" mt-4 absolute top-8 alskfdl10  w-[100%] bg-[#ededed] rounded-xl border-2 border-mblue"
+                        *ngIf="onStartHide && locationsuggestions">
+                        <div class="hover:bg-white rounded-xl"
+                            *ngFor="let start of locationsuggestions">
+                            <div class="cursor-pointer ml-4"
+                                (click)="setStartLocation(start)">
+                                <div class="flex items-center">
+                                    <img class="w-[35px] h-[40px]"
+                                        src="assets/images/map.png" alt>
+                                    <h1 class="py-4 ml-2 text-mblue">{{
+                                        start.placeName }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative alskfdl1 w-full mb-6 group">
+                    <input
+                        (focus)="onFucusChange('end')"
+                        [(ngModel)]="endLocation"
+                        (input)="searchEndLocation()"
+                        type="text"
+                        name="unload_location"
+                        id="unload_location"
+                        class="block alskfdl1 py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                        placeholder=" " required />
+                    <label for="unload_location"
+                        class="peer-focus:font-medium alskfdl1 absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -alskfdl10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Unload
+                        Location</label>
+                    <div style="z-index: 99;"
+                        class=" mt-4 absolute top-8 alskfdl10  w-[100%] bg-[#ededed] rounded-xl border-2 border-mblue"
+                        *ngIf="onEndHide && locationsuggestions">
+                        <div class="hover:bg-white rounded-xl"
+                            *ngFor="let end of locationsuggestions">
+                            <div class="cursor-pointer ml-4"
+                                (click)="setEndLocation(end)">
+                                <div class="flex items-center">
+                                    <img class="w-[35px] h-[35px]"
+                                        src="assets/images/map.png" alt>
+                                    <h1 class="py-4 ml-2 text-mblue">{{
+                                        end.placeName }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid  md:grid-cols-2 md:gap-6">
+                    <div class="relative alskfdl0 w-full mb-6 group">
+                        <input type="date" [(ngModel)]="date" name="date"
+                            id="date"
+                            class=" block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" " required />
+                        <label for="date"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -alskfdl10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pickup
+                            Date</label>
+                    </div>
+                    <div class="relative alskfdl0 w-full mb-6 group">
+                        <input type="time" [(ngModel)]="time" 
+                            name="time" id="time"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" " required />
+                        <label for="time"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -alskfdl10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pickup
+                            Time</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <app-load-location [focus]="focus"></app-load-location>
+            </div>
+        </div>
+        <button type="submit"
+            class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Countinue</button>
+    </form>
+</div>
+
+<div inline-datepicker id="datePicker" data-date="02/25/2022"></div>
+
+
+<div class="relative max-w-sm">
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+      </svg>
+    </div>
+    <input datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+  </div>
+  
